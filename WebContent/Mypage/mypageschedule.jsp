@@ -15,7 +15,9 @@
 					<img src="../images/demo/avatar.png" alt="Card image"
 						class="img-circle" height="10">
 
-					<p>당신은 '관객' 등급입니다!</p>
+						<!-- - 사진 들어가는 칸 -->
+					<td colspan="2"><input type="file" name="picture"
+							id="picture" width="2" height="2"></td>
 					<div class="card-body">
 						<h4 class="card-title">John Doe</h4>
 						<p class="card-text">Some example text some example text. John

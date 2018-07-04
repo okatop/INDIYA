@@ -1,53 +1,50 @@
 package com.indiya.member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.indiya.member.factory.MemberActionFactory;
-import com.indiya.member.model.MemberDto;
-import com.indiya.member.model.ZipDto;
-import com.indiya.member.service.MemberService;
-import com.indiya.member.service.MemberServiceImpl;
 import com.indiya.util.PageMove;
+import com.indiya.util.ParameterCheck;
 
 @WebServlet("/user")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String path = "/Mainpage/main.jsp";
 		String act = request.getParameter("act");
-		System.out.println("act ==== " + act);
+		String path = "/Mainpage/main.jsp";
+		String saveok = ParameterCheck.nullToBlank(request.getParameter("saveok"));
 		
 		if("MemberModify".equals(act)) {
 			path = MemberActionFactory.getMemberModifyAction().execute(request, response);
 			PageMove.redirect(request, response, path);
-		} else if("Memberlogin".equals(act)) {
-			
-			PageMove.redirect(request, response, "/login/login.jsp");
+		} else if("login".equals(act)) {
+			System.out.println("컨트롤러도착");
+			path = MemberActionFactory.getMemberLoginAction().execute(request, response);
+			PageMove.redirect(request, response, path);
 		} else if("idsearch".equals(act)) {
+			System.out.println("아이디서치 컨트롤");
 			path = MemberActionFactory.getMemberIdSearchAction().execute(request, response);
 			PageMove.forward(request, response, path);
-		
 		} else if("idcheck".equals(act)) {
+			System.out.println("아이디 체크 컨트롤");
 			path = MemberActionFactory.getMemberIdCheckAction().execute(request, response);
 			PageMove.forward(request, response, path);
 		} else if("register".equals(act)) {
-			
+			path= MemberActionFactory.getMemberRegisterAction().execute(request, response);
+			PageMove.forward(request, response, path);
+			System.out.println("컨트롤 도착");
 		} else if("mchange".equals(act)) {
 			path = MemberActionFactory.getMusicianChangeAction().execute(request, response);
 			PageMove.forward(request, response, path);
+		} else if("mvjoin".equals(act)) {
+			
 		}
 	}
 /*

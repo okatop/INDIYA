@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indiya.action.Action;
 import com.indiya.member.model.MemberDto;
+import com.indiya.member.service.MemberServiceImpl;
 
 public class MemberIdCheckAction implements Action {
 
@@ -28,11 +29,9 @@ public class MemberIdCheckAction implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path = "/Mypage/idcheck.jsp";
-		String id = request.getParameter("id");
-		MemberDto dto = new MemberDto();
-		if(id == dto.getId()) {
-			dto.setId(id);
-		}
+//		String id = request.getParameter("id");
+//		int cnt = MemberServiceImpl.getMemberService().idCheck(id);
+//		MemberDto dto = new MemberDto();
 		return path;
 	}
 	

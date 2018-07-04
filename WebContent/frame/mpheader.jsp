@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+ pageEncoding="UTF-8" import="com.indiya.member.model.MemberDto, javax.servlet.http.HttpSession"%>
 <%@include file = "/frame/public.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,18 @@
               <li><a href="/Mainpage/stage.jsp">stage</a></li>
               <li><a href="/Mainpage/fundinglist_n_u.jsp">funding</a></li>
               <li><a href="/Mainpage/QNA.jsp">Q&A</a></li>
-              <li><a href="/Mainpage/login.jsp">LOGIN</a></li>
+              <%
+      		  MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+              if(memberDto == null) {    
+              %>
+              <li><a href="/Mainpage/loginpage.jsp">LOGIN</a></li>
+              <%
+              } else {
+              %>
+              <li><a href="/Mainpage/loginpage.jsp">LOGOUT</a></li>
+              <%
+              }
+              %>
         </ul>
       </nav>
     </header>

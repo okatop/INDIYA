@@ -1,14 +1,14 @@
 package com.indiya.member.service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.indiya.member.dao.MemberDao;
 import com.indiya.member.dao.MemberDaoImpl;
 import com.indiya.member.model.MemberDto;
 import com.indiya.member.model.MusicianChangeDto;
-import com.indiya.member.model.ZipDto;
+import com.indiya.member.model.MypicDto;
+
 
 public class MemberServiceImpl implements MemberService{
 
@@ -29,10 +29,7 @@ public int idCheck(String id) {
 	return MemberDaoImpl.getMemberDao().idCheck(id);
 }
 
-@Override
-public List<ZipDto> zipSearch(String dong) {
-	return MemberDaoImpl.getMemberDao().zipSearch(dong);
-}
+
 
 @Override
 public int registerMember(MemberDto memberDto) {
@@ -60,5 +57,15 @@ public MemberDto login(String id, String pass) {
 	map.put("userpass", pass);
 	return MemberDaoImpl.getMemberDao().login(map);
 	}
+
+@Override
+public int uploadFile(MypicDto mypicDto) {
+	return 0;
+}
+
+@Override
+public MypicDto selectOne(int num) {
+	return null;
+}
 
 }

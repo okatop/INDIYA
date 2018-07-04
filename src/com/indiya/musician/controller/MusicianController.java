@@ -36,7 +36,7 @@ public class MusicianController extends HttpServlet {
 		
 		String path = "/Bandpage/bandpage.jsp";
 		if(musician_flag == null) {
-			System.out.println("����� �������� �ƴմϴ�.");
+			System.out.println("");
 			PageMove.redirect(request, response, path);
 			
 		} else {	

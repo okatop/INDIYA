@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file = "/frame/public.jsp"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +26,7 @@
               <li><a href="/Mainpage/community.jsp">stage</a></li>
               <li><a href="pages/sidebar-left.html">funding</a></li>
               <li><a href="pages/sidebar-right.html">Q&A</a></li>
-              <li><a href="pages/basic-grid.html">LOGIN</a></li>          
+              <li><a href="/Mainpage/loginpage.jsp">LOGIN</a></li>          
          
       </nav>
 

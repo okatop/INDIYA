@@ -16,7 +16,6 @@ import com.indiya.util.ParameterCheck;
 public class MemberPictureController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String act = request.getParameter("act");
 		int bcode = ParameterCheck.naNToZero(request.getParameter("bcode"));
@@ -30,7 +29,7 @@ public class MemberPictureController extends HttpServlet {
 			System.out.println("전체목록으로 가라");
 			PageMove.redirect(request, response, path);
 		} else {
-			if("mvwrite".equals(act)) {
+			if("mypagepic".equals(act)) {
 				path = "/album/write.jsp" + queryString;
 				PageMove.redirect(request, response, path);
 			} else if("".equals(act)) {

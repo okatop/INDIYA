@@ -3,7 +3,9 @@ package com.indiya.member.factory;
 import com.indiya.action.Action;
 import com.indiya.action.member.MemberIdCheckAction;
 import com.indiya.action.member.MemberIdSearchAction;
+import com.indiya.action.member.MemberLoginAction;
 import com.indiya.action.member.MemberModifyAction;
+import com.indiya.action.member.MemberRegisterAction;
 import com.indiya.action.member.MemberZipAction;
 import com.indiya.action.member.MusicianChangeAction;
 
@@ -15,6 +17,7 @@ public class MemberActionFactory {
 	private static Action memberModifyAction;
 	private static Action memberRegisterAction;
 	private static Action musicianChangeAction;
+	private static Action memberLoginAction;
 	
 	static {
 		memberIdSearchAction = MemberIdSearchAction.getMemberIdSearchAction();
@@ -22,6 +25,8 @@ public class MemberActionFactory {
 		memberZipAction = MemberZipAction.getMemberZipAction();
 		memberModifyAction = MemberModifyAction.getMemberModifyAction();
 		musicianChangeAction = MusicianChangeAction.getMusicianChangeAction();
+		memberRegisterAction = MemberRegisterAction.getMemberRegisterAction();
+		memberLoginAction = MemberLoginAction.getMemberLoginAction();
 	}
 
 	public static Action getMemberIdCheckAction() {
@@ -47,4 +52,9 @@ public class MemberActionFactory {
 	public static Action getMusicianChangeAction() {
 		return musicianChangeAction;
 	}
+
+	public static Action getMemberLoginAction() {
+		return memberLoginAction;
+	}
+	
 }

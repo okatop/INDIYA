@@ -4,13 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 
 import com.indiya.member.model.MemberDto;
-import com.indiya.member.model.MusicianChangeDto;
-import com.indiya.member.model.ZipDto;
+import com.indiya.member.model.MypicDto;
 import com.indiya.util.DBClose;
 import com.indiya.util.DBConnection;
 
@@ -56,36 +54,6 @@ public class MemberDaoImpl implements MemberDao {
 		return cnt;
 	}
 
-	@Override
-	public List<ZipDto> zipSearch(String dong) {
-		List<ZipDto> list = new ArrayList<ZipDto>();
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn=DBConnection.makeConnection();
-			String sql = "";
-			sql += "select zipcode, sido || ' ' || gugun || ' ' || doro as address \n";
-			sql += "from zipcode \n";
-			sql += "where doro like '%'||?||'%'";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dong);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				ZipDto zipDto = new ZipDto();
-				zipDto.setZipcode(rs.getString("zipcode"));
-				zipDto.setAddress(rs.getString("address"));
-				
-				list.add(zipDto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBClose.close(conn, pstmt);
-		}
-		return list;
-	}
 
 	@Override
 	public int registerMember(MemberDto memberDto) {
@@ -97,8 +65,8 @@ public class MemberDaoImpl implements MemberDao {
 			conn = DBConnection.makeConnection();
 			String sql = "";
 			sql += "insert \n";
-			sql += "	into bmember (name, id, pass, email1, email2, zipNo, roadAddrpart1, addrDetail, tel1, tel2, tel3, sex, find_pass, find_pass_check) \n";
-			sql += "	values (?, member_seq.nextval, ?, ?, ?, ?, ?,?,?,?,?,?,?,?) \n";
+			sql += "	into member (name, id, pass, email1, email2, zipNo, roadAddrpart1, addrDetail, tel1, tel2, tel3,join_date, sex, find_pass, find_pass_check) \n";
+			sql += "	values (?, ?, ?, ?, ?, ?, ?,?,?,?,?,sysdate,?,?,?) \n";
 			pstmt = conn.prepareStatement(sql);
 			int idx = 0;
 			pstmt.setString(++idx, memberDto.getName());
@@ -109,9 +77,9 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(++idx, memberDto.getZipNo());
 			pstmt.setString(++idx, memberDto.getRoadAddrpart1());
 			pstmt.setString(++idx, memberDto.getAddrDetail());
-			pstmt.setInt(++idx, memberDto.getTel1());
-			pstmt.setInt(++idx, memberDto.getTel2());
-			pstmt.setInt(++idx, memberDto.getTel3());
+			pstmt.setString(++idx, memberDto.getTel1());
+			pstmt.setString(++idx, memberDto.getTel2());
+			pstmt.setString(++idx, memberDto.getTel3());
 			pstmt.setString(++idx, memberDto.getSex());
 			pstmt.setString(++idx, memberDto.getFind_pass());
 			pstmt.setString(++idx, memberDto.getFind_pass_check());
@@ -153,9 +121,9 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(++idx, memberDto.getZipNo());
 			pstmt.setString(++idx, memberDto.getRoadAddrpart1());
 			pstmt.setString(++idx, memberDto.getAddrDetail());
-			pstmt.setInt(++idx, memberDto.getTel1());
-			pstmt.setInt(++idx, memberDto.getTel2());
-			pstmt.setInt(++idx, memberDto.getTel3());
+			pstmt.setString(++idx, memberDto.getTel1());
+			pstmt.setString(++idx, memberDto.getTel2());
+			pstmt.setString(++idx, memberDto.getTel3());
 			pstmt.setString(++idx, memberDto.getSex());
 			pstmt.setString(++idx, memberDto.getFind_pass());
 			pstmt.setString(++idx, memberDto.getFind_pass_check());
@@ -197,5 +165,60 @@ public class MemberDaoImpl implements MemberDao {
 			DBClose.close(conn, pstmt, rs);
 		}
 		return memberDto;
+	}
+
+	@Override
+	public int uploadFile(MypicDto mypicDto) {
+		Connection conn = null;
+    	PreparedStatement pstmt = null;
+    	int cnt =0;
+    	MypicDto dto = null;
+    	
+    	try {
+    		conn = DBConnection.makeConnection();
+        	StringBuffer sql = new StringBuffer();
+        	sql.append("insert into fileboard(num, filename) \n");
+        	sql.append("	values(filenum_seq.nextval, ?) \n");
+        	
+			pstmt = conn.prepareStatement(sql.toString());
+			int idx = 0;
+			pstmt.setString(++idx, dto.getFileName());
+			cnt=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, pstmt);
+		}
+          return cnt;
+    }
+
+	@Override
+	public MypicDto selectOne(int num) {
+		Connection conn = null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	MypicDto dto =null;
+    	
+    	try {
+    		conn=DBConnection.makeConnection();
+        	StringBuffer sql = new StringBuffer();
+        	sql.append("select * \n");
+        	sql.append("from Memberpicture \n");
+        	sql.append("where num =? \n");
+        	pstmt = conn.prepareStatement(sql.toString());
+        	pstmt.setInt(1, num);
+        	rs = pstmt.executeQuery();
+        	
+			while(rs.next()) {
+			dto.setNum(rs.getInt("num"));
+			dto.setFileName(rs.getString("filename"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, pstmt, rs);
+		}
+		return dto;
 	}
 }

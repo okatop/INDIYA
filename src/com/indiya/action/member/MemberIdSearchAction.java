@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.indiya.action.Action;
 import com.indiya.member.model.MemberDto;
+import com.indiya.member.service.MemberServiceImpl;
 
 public class MemberIdSearchAction implements Action{
 
@@ -28,11 +29,13 @@ public class MemberIdSearchAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("액션 1차 관문");
-		String path = "/Mypage/mypagemodify.jsp";
+		String path = "/Mypage/join.jsp";
 		HttpSession session = request.getSession(); 
 		MemberDto dto = (MemberDto) session.getAttribute("userInfo");
 		String id = request.getParameter("id");
-		if(dto != null) {
+		int cnt = MemberServiceImpl.getMemberService().idCheck(id);
+		
+		if(cnt == 0) {
 			dto.setId(request.getParameter("id"));
 			System.out.println("여기까진 온거냐");
 		}
