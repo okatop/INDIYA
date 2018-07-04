@@ -52,7 +52,7 @@ function openidcheck() {
     <!--------------------------------------------------------------------------------------------------------->
 	 <center>
 		<form name="joinform" method="post" action="">
-					<table class="table" width="780" height="700" cellspacing="4"
+					<table class="table" width="600" height="700" cellspacing="4"
 						cellpadding="5">
 <input type="hidden" name="act" id="act" value="idcheck">
 <input type="hidden" name="act" id="act" value="MemberModify">

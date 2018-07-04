@@ -26,8 +26,8 @@ public class MusicianController extends HttpServlet {
 		String musician_flag = request.getParameter("flag");
 		int number = Integer.parseInt(request.getParameter("number"));
 		
-		int bcode = ParameterCheck.nanToZero(request.getParameter("bcode"));
-		int pg = ParameterCheck.nanToOne(request.getParameter("pg"));
+		int bcode = ParameterCheck.naNToZero(request.getParameter("bcode"));
+		int pg = ParameterCheck.naNToOne(request.getParameter("pg"));
 		String key = ParameterCheck.nullToBlank(request.getParameter("key"));
 		String word = ParameterCheck.nullToBlank(request.getParameter("word"));
 		String queryString = "bcode=" + bcode + "&pg=" + pg + "&key=" + key + "&word=" + Encoder.urlUtf(word);
@@ -36,7 +36,7 @@ public class MusicianController extends HttpServlet {
 		
 		String path = "/Bandpage/bandpage.jsp";
 		if(musician_flag == null) {
-			System.out.println("´ç½ÅÀº ¹ÂÁö¼ÇÀÌ ¾Æ´Õ´Ï´Ù.");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Õ´Ï´ï¿½.");
 			PageMove.redirect(request, response, path);
 			
 		} else {	
@@ -45,7 +45,7 @@ public class MusicianController extends HttpServlet {
 				path = "../index.html";
 				PageMove.redirect(request, response, path);
 			} else if("".equals(act)) {
-				path = "/¾îµò°¡/ºäÆäÀÌÁö" + queryString;
+				path = "/ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + queryString;
 				PageMove.redirect(request, response, path);
 			} else if("memberwrite".equals(act)) {
 				path = MusicianFactory.getMusicianMemberWriteAction().execute(request, response);

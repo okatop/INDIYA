@@ -1,4 +1,4 @@
-package com.indiya.controller;
+package com.indiya.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
