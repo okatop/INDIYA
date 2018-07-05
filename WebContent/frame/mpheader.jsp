@@ -23,6 +23,7 @@
               <li><a href="/Mainpage/QNA.jsp">Q&A</a></li>
               <%
       		  MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+           	  System.out.println("memberDto : "+memberDto);
               if(memberDto == null) {    
               %>
               <li><a href="/Mainpage/loginpage.jsp">LOGIN</a></li>

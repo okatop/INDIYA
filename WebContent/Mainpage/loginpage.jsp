@@ -26,11 +26,11 @@ function login(){
         <form role="form" id="loginform" name="loginform" method="post">
           <div class="form-group">
             <span class="glyphicon glyphicon-user"></span>
-            <input type="text" class="form-control" id="usrname" placeholder="Enter id">
+            <input type="text" class="form-control" id="usrname" name="usrname" placeholder="Enter id">
           </div>
           <div class="form-group">
             <span class="glyphicon glyphicon-lock"></span>
-            <input type="text" class="form-control" id="psw" placeholder="Enter password">
+            <input type="text" class="form-control" id="psw" name="psw" placeholder="Enter password">
           </div>
           <div class="checkbox">
             <label><input type="checkbox" value="saveok" checked>아이디 저장</label>

@@ -41,7 +41,7 @@ public class MemberRegisterAction implements Action {
 		dto.setJoin_date(request.getParameter("join_date"));
 		dto.setFind_pass(request.getParameter("find_pass"));
 		dto.setFind_pass_check(request.getParameter("find_pass_check"));
-		dto.setRoadAddrpart1(request.getParameter("roadAddrpart1"));
+		dto.setRoadAddrpart1(request.getParameter("roadAddrPart1"));
 		dto.setSex(request.getParameter("sex"));
 		dto.setZipNo(request.getParameter("zipNo"));
 		dto.setTel1(request.getParameter("tel1"));

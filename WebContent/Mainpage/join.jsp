@@ -19,7 +19,6 @@
 				return;
 			} else {
 				alert("스크립트 도착");
-				document.getElementById("act").value = "register";
 				document.joinform.action = "${root}/user";
 				document.joinform.submit();
 			}
@@ -56,6 +55,7 @@
 				if(httpRequest.status == 200) {
 					cnt = httpRequest.responseText;
 					if(cnt == 0) {
+						alert("사용 가능하냐 불가능하냐");
 						view.innerHTML = '<font color="blue"><b>' + id + '</b>는 사용 가능합니다.</font>';
 					} else {
 						view.innerHTML = '<font color="red"><b>' + id + '</b>는 사용중입니다.</font>';
@@ -66,9 +66,7 @@
 			}
 		}
 		
-		function select_a(val) { 
-			   alert(val);
-		} 
+		
 	</script>
 <!----------------------------------------------------------------------------------------------------------------------------------------->
 

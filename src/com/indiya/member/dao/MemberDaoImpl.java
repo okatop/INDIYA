@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.indiya.member.model.MemberDto;
 import com.indiya.member.model.MypicDto;
+import com.indiya.musician.model.MusicianDto;
 import com.indiya.util.DBClose;
 import com.indiya.util.DBConnection;
 
@@ -220,5 +221,46 @@ public class MemberDaoImpl implements MemberDao {
 			DBClose.close(conn, pstmt, rs);
 		}
 		return dto;
+	}
+
+	@Override
+	public int changeMusician(MusicianDto musician) {
+		int cnt= 0;
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	     
+	    try {
+	        conn = DBConnection.makeConnection();
+	        conn.setAutoCommit(false);
+	        String sql = "update member set musician_flag = 'Y' where id = ?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, musician.getMusician_id());
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	     
+	        sql = "insert into musician(musician_id, musician_name, musician_info, genre, area, pic) \n";
+	        sql += " values(?, ?, ?, ?, ?, ?)";
+	        System.out.println(sql);
+	        pstmt = conn.prepareStatement(sql);
+	        int idx = 0;
+	 
+	        pstmt.setString(++idx, musician.getMusician_id());
+	        pstmt.setString(++idx, musician.getMusician_name());
+	        pstmt.setString(++idx, musician.getMusician_info());
+	        pstmt.setString(++idx, musician.getGenre());
+	        pstmt.setString(++idx, musician.getArea());
+	        pstmt.setString(++idx, musician.getPic());
+	        cnt = pstmt.executeUpdate();
+	        conn.commit();
+	    } catch (SQLException e) {
+	        cnt = 0;
+	        e.printStackTrace();
+	        try {
+	            conn.rollback();
+	        } catch (SQLException e1) {
+	            e1.printStackTrace();
+	        }
+	    }
+	    return cnt;
 	}
 }

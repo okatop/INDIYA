@@ -31,8 +31,10 @@ public class MemberLoginAction  implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("액션 도착");
-		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
+		String id = request.getParameter("usrname");
+		System.out.println("id:"+id);
+		String pass = request.getParameter("psw");
+		System.out.println("pass:"+pass);
 		String path = "Mainpage/main.jsp";
 		MemberDto memberDto = MemberServiceImpl.getMemberService().login(id, pass);
 		HttpSession session = request.getSession();

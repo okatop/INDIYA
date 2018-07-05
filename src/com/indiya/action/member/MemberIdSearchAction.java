@@ -28,6 +28,7 @@ public class MemberIdSearchAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/plain;charset=UTF-8");
 		System.out.println("액션 1차 관문");
 		String path = "/Mypage/join.jsp";
 		HttpSession session = request.getSession(); 
