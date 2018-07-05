@@ -67,7 +67,7 @@ public class FundingDaoImpl implements FundingDao {
 			sql.append("from funding f, funding_status s \n");
 			sql.append("where f.no = s.no \n");
 			//sql.append("order by close desc");
-			//TODO map�� �˻� ����(�̸� ��), ����(����, ���, ����)
+			//TODO map占쏙옙 占싯삼옙 占쏙옙占쏙옙(占싱몌옙 占쏙옙), 占쏙옙占쏙옙(占쏙옙占쏙옙, 占쏙옙占�, 占쏙옙占쏙옙)
 			
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
@@ -287,8 +287,7 @@ public class FundingDaoImpl implements FundingDao {
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, map.get("amount"));
 			pstmt.setString(2, map.get("no"));
-			pstmt.executeQuery();
-			
+			pstmt.executeUpdate();
 			pstmt.close();
 			sql.setLength(0);
 			

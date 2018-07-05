@@ -5,11 +5,28 @@
 <%@ include file="/commons/board_common.jsp" %>
 
 <script>
+var amount = "";
 function rewardSelect(){
 	var selected = $("#rewardsel option:selected").val();
-	alert(selected);
+	if(selected != ""){
+		amount = $("#"+selected + " p[name=rewardamount]").text();
+	}else{
+		amount = "";
+	}
+	$("#pricelabel").text(amount);
+	$("#totalpricelabel").text(amount);
 }
 
+function backing(){
+	if(amount == ""){
+		alert("후원을 선택하세요");
+		return;
+	}else{
+		$("input[name=amount]").val(amount);
+		document.backingForm.action = "${root}/funding";
+		document.backingForm.submit();
+	}
+}
 </script>
 <body id="top">
 
@@ -56,11 +73,10 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 						<div class="">7일 남음</div>
 					</div>
 					
-<c:if test="${param.userinfo != 'admin'}">
+<c:if test="${userInfo.id != 'admin'}">
 						<button class="btn" style="width: 100%;" data-toggle="modal"
 						data-target="#myModal">후원하기</button>
 </c:if>
-						
 				</div>
 				<!-- 펀딩 상세 상단 오른쪽 끝 -->
 
@@ -86,7 +102,7 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 				<ul>
 				<c:forEach var="reward" items="${rewardlist}" varStatus="i">
 					<li class="services">
-						<article class="">
+						<article class="" id="reward${i.count}">
 							<header>
 								<figure class="">
 									<img class="imgl borderedbox inspace-5"
@@ -94,7 +110,7 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 								</figure>
 							<address>Reward${i.count}
 									<a href="#">${reward.title}</a>
-									<p class="comcont">${reward.amount}</p>
+									<p class="comcont" name="rewardamount">${reward.amount}</p>
 								</address>
 							</header>
 							<div class="comcont">
@@ -111,6 +127,10 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
+				<form id="backingForm" name="backingForm" action="" method="post">
+				<input type="hidden" name="act" value="backingfunding">
+				<input type="hidden" name="seq" value="${detail.no}">
+				<input type="hidden" name="amount" value="">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
@@ -131,9 +151,9 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 									what you are thinking.</p>
 							</div>
 
+								
 
 							<div class="">
-								<form action="#" method="post">
 
 									<div class="one_third first">
 										<!-- 위치지정 용 -->
@@ -145,36 +165,36 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 											<span class="input-group-addon" id="">Reward :</span>
 											<select id="rewardsel" class="form-control" onchange="javacript:rewardSelect();">
 												<!-- 리워드  -->
-												<option name="" value="">select</option>
+												<option name="none" value="">select</option>
 											<c:forEach var="reward" items="${rewardlist}" varStatus="i">
-												<option name="${i.count}" value="${i.count}">${i.count}</option>
+												<option name="${i.count}" value="reward${i.count}">${i.count}</option>
 											</c:forEach>
 											</select>
 										</div>
 										<br>
 										<div class="input-group">
 											<span class="input-group-addon" id="">금&nbsp;&nbsp;&nbsp;&nbsp;액
-												:&nbsp;</span> <label for="" class="form-control">$100</label>
+												:&nbsp;</span> <label for="" class="form-control" id="pricelabel"></label>
 											<!-- 금액  -->
 										</div>
 										<br>
 										<div class="input-group">
 											<span class="input-group-addon" id="">보유 코인 :</span> <label
-												for="" class="form-control">$50</label>
+												for="" class="form-control">0</label>
 											<!-- 보유 코인  -->
 										</div>
 										<br>
 										<div class="input-group">
 											<span class="input-group-addon" id="">사용 코인 :</span> <input
 												type="number" class="form-control" name="" id="" value=""
-												min="0" required>
+												min="0">
 											<!-- 사용코인  -->
 										</div>
 										<br>
 
 										<div class="input-group">
 											<span class="input-group-addon" id="">총 금액 : </span> <label
-												for="" class="form-control">$50</label>
+												for="" class="form-control" id="totalpricelabel"></label>
 											<!-- 총금액  -->
 											<!-- <input type="text" class="input-group" name="" id="" value="" required> -->
 										</div>
@@ -183,15 +203,16 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 							</div>
 
 							<div class="block clear"></div>
-							</form>
+							
 						</div>
 						<!-- 모달 바디 끝 -->
 
 						<div class="modal-footer">
 							<button type="button" class="btn" data-dismiss="modal">취소</button>
-							<button type="button" class="btn">후원하기</button>
+							<button type="button" class="btn" onclick="javascript:backing();">후원하기</button>
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>

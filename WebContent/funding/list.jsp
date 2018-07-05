@@ -46,10 +46,10 @@ Funding Menu Body	Funding Menu Body	Funding Menu Body	Funding Menu Body
     <!-- ############################################### -->
 	<!-- 공지 NOTICE	NOTICE	NOTICE	NOTICE -->
 	<div class="alert alert-warning hoc center" role="alert">
-	NOTICE 1 RTFM - Read The Fucking Manual<br>
+	NOTICE 1 RTFM - Read The F Manual<br>
 	</div>
 	<div class="alert alert-danger hoc center" role="alert">
-	NOTICE 2 RTFE - Read The Fucking Error<br>
+	NOTICE 2 RTFE - Read The F Error<br>
 	</div>
 	<!-- 공지 NOTICE	NOTICE	NOTICE	NOTICE -->
 	
@@ -79,10 +79,10 @@ Funding Menu Body	Funding Menu Body	Funding Menu Body	Funding Menu Body
 				
 <!-- 뮤지션, 관리자 로그인 시 전용 버튼 -->
 		<nav class="fl_right inline">
-<c:if test="${param.userinfo == 'musician'}">
+<c:if test="${userInfo.musician_flag == 'Y'}">
 			<a href="javascript:moveWrite();"><button class="btn">펀딩신청하기</button></a>
 </c:if>
-<c:if test="${param.userinfo == 'admin'}">
+<c:if test="${userInfo.id == 'admin'}">
 			<a href="javascript:moveRequestList();"><button class="btn">펀딩신청목록</button></a>
 </c:if>
 

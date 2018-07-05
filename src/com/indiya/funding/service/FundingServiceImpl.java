@@ -83,7 +83,11 @@ public class FundingServiceImpl implements FundingService {
 
 	@Override
 	public void backingFunding(int no, String member_id, int amount) {
-
+		Map<String, String> map = new HashMap<>();
+		map.put("no", no + "");
+		map.put("member_id", member_id);
+		map.put("amount", amount + "");
+		FundingDaoImpl.getFundingDao().backingFunding(map);
 	}
 
 }

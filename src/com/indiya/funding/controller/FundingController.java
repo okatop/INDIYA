@@ -45,8 +45,10 @@ public class FundingController extends HttpServlet {
 			path = FundingActionFactory.getFundingViewAction().execute(request, response);
 			path += queryString;
 			PageMove.forward(request, response, path);
-		}else if("".equals(act)) {
-			
+		}else if("backingfunding".equals(act)) {
+			path = FundingActionFactory.getFundingBackingAction().execute(request, response);
+			path += queryString;
+			PageMove.redirect(request, response, path);
 		}else if("".equals(act)) {
 			
 		}else if("".equals(act)) {

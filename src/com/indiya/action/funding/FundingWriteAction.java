@@ -10,6 +10,7 @@ import com.indiya.action.Action;
 import com.indiya.funding.model.FundingDto;
 import com.indiya.funding.model.FundingRewardDto;
 import com.indiya.funding.service.FundingServiceImpl;
+import com.indiya.member.model.MemberDto;
 
 public class FundingWriteAction implements Action {
 
@@ -29,7 +30,7 @@ public class FundingWriteAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path = "/reboard/writefail.jsp?";
+		String path = "funding/list.jsp?";
 		
 		Map<String, String[]> map = request.getParameterMap();
 		Set<String> keys = map.keySet();
@@ -46,12 +47,9 @@ public class FundingWriteAction implements Action {
 		System.out.println("nums : "+nums);
 		List<FundingRewardDto> list = new ArrayList<>();
 		HttpSession session = request.getSession();
-		// MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
-		// if(memberDto != null) {
-		// TODO Login check
-		
+		 MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		 if(memberDto != null) {
 		System.out.println("-----------------------");
-		if (true) {
 			FundingDto fundingDto = new FundingDto();
 			fundingDto.setMusician_id(request.getParameter("musician_id"));
 			fundingDto.setPic(request.getParameter("pic"));
@@ -78,7 +76,7 @@ public class FundingWriteAction implements Action {
 				FundingServiceImpl.getFundingService().writeFundingReward(list);
 				path = "funding/list.jsp?seq=" + seq + "&";
 			} else {
-				path = "/funding/index.jsp?";
+				path = "funding/list.jsp?";
 			}
 		}
 		return path;
