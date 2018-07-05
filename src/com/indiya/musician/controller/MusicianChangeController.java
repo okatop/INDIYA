@@ -81,12 +81,12 @@ public class MusicianChangeController extends HttpServlet {
         }
          
         request.setAttribute("chk2", "T");
-        if(MemberServiceImpl.getMemberService().changeMusician(musician) > 0) 
+     /*   if(MemberServiceImpl.getMemberService().changeMusician(musician) > 0) 
             request.setAttribute("chk", "SUCC");
         else
             request.setAttribute("chk", "FAIL");
      
-        PageMove.forward(request, response, "/Mypage/musicianChanged.jsp"); 
+        PageMove.forward(request, response, "/Mypage/musicianChanged.jsp");*/ 
              
     }
  
