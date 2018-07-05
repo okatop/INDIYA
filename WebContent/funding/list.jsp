@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/frame/mpheader.jsp"%>
 <%@ include file="/commons/board_common.jsp" %>
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:set> 
 <script>
 function moveWrite(){
 	document.getElementById("act").value = "mvwrite";
@@ -112,6 +114,8 @@ Funding Menu Body	Funding Menu Body	Funding Menu Body	Funding Menu Body
 			<div class="thumbnail">
 				<a href="${root}/funding?act=viewfunding&seq=${funding.no}&pg=1"><img src="../images/demo/gallery/01.png" alt="">
 				<div class="caption">
+				<fmt:parseDate var="parseClose" value="${funding.close}" pattern="yyyy-MM-dd HH:mm:ss" />
+				<fmt:formatDate var="close" value="${parseClose}" pattern="yyyyMMdd"/>
 					<h6>${funding.title}</h6>
 					<p>${funding.musician_id}</p>
 					<!-- <p>카테고리</p> -->
@@ -121,8 +125,18 @@ Funding Menu Body	Funding Menu Body	Funding Menu Body	Funding Menu Body
 						</div>
 					</div>
 					<div class="inline">
-						<div class="">7일 남음</div>
-						<div class="fl_right">${funding.amount}</div>
+						<div class="">
+						<c:choose>
+						<c:when test="${close ==  today}">
+							오늘 마감
+						</c:when>
+						<c:when test="${close !=  today}">
+						<fmt:parseNumber value="${close }" integerOnly="true" var="end" scope="request" />
+							마감 ${end - today }일 전
+						</c:when>
+						</c:choose>
+						</div>
+						<div class="fl_right">${funding.amount}원 모금</div>
 					</div>
 				
 				</div>

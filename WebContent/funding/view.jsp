@@ -3,7 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/frame/mpheader.jsp"%>
 <%@ include file="/commons/board_common.jsp" %>
-
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:set>
 <script>
 var amount = "";
 function rewardSelect(){
@@ -62,7 +63,7 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 				<div class="one_quarter">
 					<h1>${detail.musician_id}</h1>
 					<div class="fl_right">${detail.amount}원</div>
-					<label>달성금액1</label>
+					<label>달성금액</label>
 
 					<div class="progress">
 						<div class="progress-bar" role="progressbar" aria-valuenow="0"
@@ -70,7 +71,20 @@ Funding Detailes Body	Funding Detailes Body	Funding Detailes Body	Funding Detail
 							style="min-width: 2em; width: <fmt:formatNumber value="${detail.amount / detail.goal}" type="percent"/>;"><fmt:formatNumber value="${detail.amount / detail.goal}" type="percent"/></div>
 					</div>
 					<div class="inline">
-						<div class="">7일 남음</div>
+						<div class="">
+							<fmt:parseDate var="parseClose" value="${detail.close}" pattern="yyyy-MM-dd HH:mm:ss" />
+							<fmt:formatDate var="close" value="${parseClose}" pattern="yyyyMMdd"/>
+						
+							<c:choose>
+							<c:when test="${close ==  today}">
+								오늘 마감
+							</c:when>
+							<c:when test="${close !=  today}">
+							<fmt:parseNumber value="${close }" integerOnly="true" var="end" scope="request" />
+								마감 ${end - today }일 전
+							</c:when>
+							</c:choose>
+						</div>
 					</div>
 					
 <c:if test="${userInfo.id != 'admin'}">
