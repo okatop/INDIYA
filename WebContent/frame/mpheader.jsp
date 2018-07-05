@@ -19,7 +19,7 @@
 			 <li><a href="/Mainpage/recruit.jsp">recruit</a></li>
 			 <li><a href="/Mainpage/community.jsp">community</a>
               <li><a href="/Mainpage/stage.jsp">stage</a></li>
-              <li><a href="/Mainpage/fundinglist_n_u.jsp">funding</a></li>
+              <li><a href="${root}/funding?act=listfunding">funding</a></li>
               <li><a href="/Mainpage/QNA.jsp">Q&A</a></li>
               <%
       		  MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
