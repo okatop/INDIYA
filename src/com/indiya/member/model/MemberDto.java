@@ -17,6 +17,7 @@ public class MemberDto {
 	private String sex;
 	private String find_pass;
 	private String find_pass_check;
+	private String musician_flag;
 	
 	public String getJoin_date() {
 		return join_date;
@@ -41,6 +42,12 @@ public class MemberDto {
 	}
 	public void setFind_pass_check(String find_pass_check) {
 		this.find_pass_check = find_pass_check;
+	}
+	public String getMusician_flag() {
+		return musician_flag;
+	}
+	public void setMusician_flag(String musician_flag) {
+		this.musician_flag = musician_flag;
 	}
 	public String getId() {
 		return id;

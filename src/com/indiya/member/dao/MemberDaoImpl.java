@@ -148,7 +148,7 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			conn = DBConnection.makeConnection();
 			String sql = "";
-			sql += "select id, name \n";
+			sql += "select id, name, musician_flag \n";
 			sql += "from member \n";
 			sql += "where id = ? and pass = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -159,6 +159,7 @@ public class MemberDaoImpl implements MemberDao {
 				memberDto = new MemberDto();
 				memberDto.setId(rs.getString("id"));
 				memberDto.setName(rs.getString("name"));
+				memberDto.setMusician_flag(rs.getString("musician_flag"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
